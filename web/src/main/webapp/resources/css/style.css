@@ -27,6 +27,10 @@ div[id^="item-quantity-error-"] {
     color: white;
 }
 
-table{
+table {
     text-align: center;
+}
+
+.error {
+    color: red;
 }

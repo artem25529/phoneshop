@@ -18,5 +18,6 @@
     <jsp:doBody/>
 </main>
 <script src="<c:url value="/resources/js/addToCart.js"/>"></script>
+<script src="<c:url value="/resources/js/removeFromCart.js"/>"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+
 <tags:page pageTitle="Product List">
   <div class="container mt-5">
     <div class="row">
@@ -62,7 +63,7 @@
               <img class="img" src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/${phone.imageUrl}">
             </td>
             <td>${phone.brand}</td>
-            <td>${phone.model}</td>
+            <td><a href="<c:url value="/productDetails/${phone.id}"/>">${phone.model}</a></td>
             <td>
               <c:forEach var="color" items="${phone.colors}" varStatus="index">
                 <c:out value="${color.code}"/>

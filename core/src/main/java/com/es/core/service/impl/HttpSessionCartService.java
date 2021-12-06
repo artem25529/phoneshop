@@ -55,6 +55,7 @@ public class HttpSessionCartService implements CartService {
     @Override
     public void remove(Long phoneId) {
         cart.removeItem(phoneId);
+        recalculateCart();
     }
 
     private Optional<CartItem> findCartItem(Long phoneId) {

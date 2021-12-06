@@ -5,9 +5,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @SessionScope
@@ -37,7 +35,7 @@ public class Cart implements Serializable {
     }
 
     public void removeItem(Long id) {
-        items.remove(id);
+        items.entrySet().removeIf(entry -> entry.getValue().getPhone().getId().equals(id));
     }
 
     public Long getTotalQuantity() {

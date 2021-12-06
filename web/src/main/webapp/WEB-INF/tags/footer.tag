@@ -1,7 +1,5 @@
-<footer class="footer mt-3">
-    <div class="d-flex justify-content-center align-center">
-        <div class="d-flex flex-column align-center p-3">
-            &#169; Expert Soft 2021
-        </div>
+<footer class="bg-light text-center text-lg-start">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        &#169; ExpertSoft
     </div>
 </footer>

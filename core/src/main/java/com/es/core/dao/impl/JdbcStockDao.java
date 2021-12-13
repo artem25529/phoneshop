@@ -36,7 +36,7 @@ public class JdbcStockDao extends JdbcAbstractDao<Stock> implements StockDao {
         super.save(INSERT_STOCK, getSqlStockParams(stock));
     }
 
-    private void update(Stock stock) {
+    public void update(Stock stock) {
         super.save(UPDATE_STOCK, getSqlStockParams(stock));
     }
 

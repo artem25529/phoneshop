@@ -46,14 +46,4 @@ public class AjaxCartController {
         return new CartDto(cart.getTotalQuantity(), cart.getTotalPrice());
     }
 
-    @PostMapping("/update")
-    public CartDto updateCart(@RequestBody @Valid PhoneDto phoneDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new InvalidFormatException();
-        }
-        cartService.remove(phoneDto.getId());
-        Cart cart = cartService.getCart();
-
-        return new CartDto(cart.getTotalQuantity(), cart.getTotalPrice());
-    }
 }

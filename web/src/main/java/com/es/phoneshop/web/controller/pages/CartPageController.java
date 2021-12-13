@@ -1,13 +1,11 @@
 package com.es.phoneshop.web.controller.pages;
 
-import com.es.core.model.cart.Cart;
 import com.es.core.model.cart.CartItem;
 import com.es.core.service.CartService;
 import com.es.phoneshop.web.controller.dto.CartItemDto;
 import com.es.phoneshop.web.controller.dto.CartItemListDto;
 import com.es.phoneshop.web.controller.validation.CartItemListDtoValidator;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +32,11 @@ public class CartPageController {
     }
 
     @GetMapping
-    public String getCart(Model model) {
-        Map<Long, CartItem> items = cartService.getCart().getItems();
-        model.addAttribute("items", items);
+    public String getCart() {
         return "cart";
     }
 
-    @ModelAttribute("items")
+    @ModelAttribute("cartItems")
     public Map<Long, CartItem> insertItems() {
         return cartService.getCart().getItems();
     }

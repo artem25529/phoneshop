@@ -16,11 +16,11 @@
                 <th>Action</th>
             </tr>
             <form:form method="put" modelAttribute="cartItemListDto" id="update-form">
-                <c:forEach var="item" items="${items}" varStatus="status">
+                <c:forEach var="item" items="${cartItems}" varStatus="status">
                     <c:set var="phone" value="${item.value.phone}"/>
                     <tr id="${phone.id}">
                         <td>${phone.brand}</td>
-                        <td>${phone.model}</td>
+                        <td><a href="<c:url value="/productDetails/${phone.id}"/>">${phone.model}</a></td>
                         <td>
                             <c:forEach var="color" items="${phone.colors}" varStatus="index">
                                 <c:out value="${color.code}"/>
@@ -35,7 +35,7 @@
                             <c:set var="i" value="${status.index}"/>
 
                             <form:hidden path="cartItems[${i}].id"/>
-                            <form:input path="cartItems[${i}].quantity" value="1" id="input-${phone.id}"
+                            <form:input path="cartItems[${i}].quantity" value="${cartItems[i].quantity}" id="input-${phone.id}"
                                         cssClass="text-right"/>
                             <form:errors path="cartItems[${i}].quantity"
                                         cssClass="error"/>

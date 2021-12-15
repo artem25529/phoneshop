@@ -2,7 +2,6 @@ package com.es.phoneshop.web.controller.pages;
 
 import com.es.core.model.order.Order;
 import com.es.core.service.impl.OrderServiceImpl;
-import com.es.core.service.impl.PlacedOrdersService;
 import com.es.phoneshop.web.controller.validation.OrderDtoValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,8 +14,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(value = "/order")
 public class OrderPageController {
-    @Resource
-    private PlacedOrdersService placedOrdersService;
 
     @Resource
     private OrderDtoValidator orderDtoValidator;
@@ -46,6 +43,6 @@ public class OrderPageController {
             return "order";
         }
         orderService.placeOrder(order);
-        return "redirect:/orderOverview/" + order.getId();
+        return "redirect:/orderOverview/" + order.getSecureId();
     }
 }

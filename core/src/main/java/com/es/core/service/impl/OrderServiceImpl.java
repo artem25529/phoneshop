@@ -18,8 +18,6 @@ import java.util.UUID;
 
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
-    @Resource
-    private PlacedOrdersService placedOrdersService;
 
     @Resource
     private StockDao stockDao;
@@ -29,6 +27,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private CartService cartService;
+
+    private List<Order> placedOrders = new ArrayList<>();
 
     @Override
     public Order createOrder() {
@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void placeOrder(Order order) {
-        order.setId(UUID.randomUUID().toString());
+        order.setSecureId(UUID.randomUUID().toString());
         List<OrderItem> orderItems = order.getOrderItems();
 
         orderItems.forEach(orderItem -> {
@@ -73,6 +73,13 @@ public class OrderServiceImpl implements OrderService {
 
         });
         cartService.clearCart();
-        placedOrdersService.getOrderList().add(order);
+        placedOrders.add(order);
+    }
+
+    public Order getPlacedOrder(String id) {
+        return placedOrders.stream()
+                .filter(order -> order.getSecureId().equalsIgnoreCase(id))
+                .findAny()
+                .orElseThrow(() -> new RuntimeException("Order with id " + id + " not found"));
     }
 }

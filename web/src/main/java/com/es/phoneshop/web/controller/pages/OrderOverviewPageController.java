@@ -1,8 +1,7 @@
 package com.es.phoneshop.web.controller.pages;
 
 import com.es.core.model.order.Order;
-import com.es.core.service.impl.PlacedOrdersService;
-import com.es.phoneshop.web.controller.exception.OrderNotFoundException;
+import com.es.core.service.impl.OrderServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,7 @@ import javax.annotation.Resource;
 public class OrderOverviewPageController {
 
     @Resource
-    private PlacedOrdersService placedOrdersService;
+    private OrderServiceImpl orderService;
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleOrderNotFoundEx(RuntimeException ex) {
@@ -27,7 +26,7 @@ public class OrderOverviewPageController {
 
     @GetMapping("{id}")
     public String orderOverView(@PathVariable String id, Model model) {
-        Order order = placedOrdersService.findOrder(id);
+        Order order = orderService.getPlacedOrder(id);
         model.addAttribute("order", order);
         return "orderOverview";
     }

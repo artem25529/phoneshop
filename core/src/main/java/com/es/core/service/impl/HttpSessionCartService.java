@@ -13,10 +13,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Service
+@Service("cartService")
 public class HttpSessionCartService implements CartService {
     @Resource
     private Cart cart;
@@ -55,6 +56,14 @@ public class HttpSessionCartService implements CartService {
     @Override
     public void remove(Long phoneId) {
         cart.removeItem(phoneId);
+        recalculateCart();
+    }
+
+    @Override
+    public void clearCart() {
+        cart.setItems(new LinkedHashMap<>());
+        cart.setTotalQuantity(0L);
+        cart.setTotalPrice(BigDecimal.ZERO);
     }
 
     private Optional<CartItem> findCartItem(Long phoneId) {

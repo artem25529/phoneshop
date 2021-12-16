@@ -5,6 +5,7 @@ import com.es.core.model.cart.Cart;
 import com.es.core.model.cart.CartItem;
 import com.es.core.model.order.Order;
 import com.es.core.model.order.OrderItem;
+import com.es.core.model.order.OrderStatus;
 import com.es.core.model.phone.Phone;
 import com.es.core.service.CartService;
 import com.es.core.service.OrderService;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
         });
 
         order.setOrderItems(orderItems);
-        BigDecimal subtotal =  cartItems.stream()
+        BigDecimal subtotal = cartItems.stream()
                 .map(CartItem::getPhone)
                 .map(Phone::getPrice)
                 .reduce(BigDecimal::add)
@@ -60,6 +63,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void placeOrder(Order order) {
         order.setSecureId(UUID.randomUUID().toString());
+        order.setStatus(OrderStatus.NEW);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.y HH:mm");
+        String dateString = formatter.format(LocalDateTime.now());
+        order.setDate(dateString);
         List<OrderItem> orderItems = order.getOrderItems();
 
         orderItems.forEach(orderItem -> {
@@ -81,5 +88,9 @@ public class OrderServiceImpl implements OrderService {
                 .filter(order -> order.getSecureId().equalsIgnoreCase(id))
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("Order with id " + id + " not found"));
+    }
+
+    public List<Order> getPlacedOrders() {
+        return placedOrders;
     }
 }

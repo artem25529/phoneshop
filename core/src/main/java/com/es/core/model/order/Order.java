@@ -24,11 +24,20 @@ public class Order
     private String contactPhoneNo;
 
     private OrderStatus status;
+    private String date;
 
     private static Long idCounter = 0L;
 
     public Order() {
         id = ++idCounter;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getSecureId() {

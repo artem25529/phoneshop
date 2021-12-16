@@ -14,6 +14,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/ajaxCart")
 public class AjaxCartController {
+
     @Resource
     private CartService cartService;
 

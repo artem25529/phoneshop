@@ -27,8 +27,17 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-end">
                     <div class="d-flex flex-column align-items-end">
-                        <a href="#" class="mb-3">Login</a>
-                        <a href="#" class="btn btn-outline-primary">
+                        <b>${pageContext.request.remoteUser}</b>
+
+                        <c:url var="logoutUrl" value="/logout"/>
+                        <form class="form-inline" action="${logoutUrl}" method="post">
+                            <input type="submit" value="Log out" />
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </div>
+                    <div class="d-flex flex-column align-items-end">
+                        <a href="<c:url value="/admin/orders"/>" class="mb-3">Login</a>
+                        <a href="<c:url value="/cart"/>" class="btn btn-outline-primary">
                             My cart:
                             <span id="cart-items-quantity"></span>
                             <span id="total-price"></span>

@@ -1,7 +1,7 @@
 package com.es.phoneshop.web.controller.pages;
 
 import com.es.core.model.order.Order;
-import com.es.core.service.impl.OrderServiceImpl;
+import com.es.core.service.OrderService;
 import com.es.phoneshop.web.controller.validation.OrderDtoValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -24,7 +24,7 @@ public class OrderPageController {
     }
 
     @Resource
-    private OrderServiceImpl orderService;
+    private OrderService orderService;
 
     @ModelAttribute("order")
     public Order insertOrder() {

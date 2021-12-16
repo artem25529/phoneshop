@@ -90,7 +90,20 @@ public class OrderServiceImpl implements OrderService {
                 .orElseThrow(() -> new RuntimeException("Order with id " + id + " not found"));
     }
 
+    @Override
+    public void setStatus(Long id, OrderStatus orderStatus) {
+        Order order = findPlacedOrderById(id);
+        order.setStatus(orderStatus);
+    }
+
     public List<Order> getPlacedOrders() {
         return placedOrders;
+    }
+
+    private Order findPlacedOrderById(Long id) {
+        return placedOrders.stream()
+                .filter(order -> order.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Order with id " + id + " not found"));
     }
 }

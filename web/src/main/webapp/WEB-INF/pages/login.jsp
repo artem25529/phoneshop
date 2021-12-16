@@ -5,6 +5,7 @@
 <tags:page pageTitle="Login">
     <div class="container">
         <div class="row justify-content-center">
+            <div style="color:red">${SPRING_SECURITY_LAST_EXCEPTION.message}</div>
             <form action="<c:url value="/appLogin"/>" method="post" id="loginForm">
                 Login: <input type="text" name="app_username"><br/><br/>
                 Password: <input type="password" name="app_password"><br/><br/>
@@ -13,12 +14,12 @@
         </div>
     </div>
 
-    <script>
+    <%--<script>
         let err = $(location).attr('href');
         if (err.includes('error')) {
             $('#loginForm').before($('<div>')
                     .text('Wrong credentials!')
                     .css('color', 'red'))
         }
-    </script>
+    </script>--%>
 </tags:page>

@@ -23,20 +23,25 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/order"/> ">Order</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/admin/orders"/> ">Admin</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="d-flex justify-content-between align-items-end">
                     <div class="d-flex flex-column align-items-end">
-                        <b>${pageContext.request.remoteUser}</b>
+                        <c:if test="${not empty pageContext.request.remoteUser}">
+                            <b>${pageContext.request.remoteUser}</b>
 
-                        <c:url var="logoutUrl" value="/logout"/>
-                        <form class="form-inline" action="${logoutUrl}" method="post">
-                            <input type="submit" value="Log out" />
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        </form>
+                           <form class="form-inline" action="<c:url value="/appLogout"/>" method="post">
+                                <input type="submit" value="Logout" />
+                            </form>
+                        </c:if>
+
+
                     </div>
                     <div class="d-flex flex-column align-items-end">
-                        <a href="<c:url value="/admin/orders"/>" class="mb-3">Login</a>
+                        <a href="<c:url value="/login"/>" class="mb-3">Login</a>
                         <a href="<c:url value="/cart"/>" class="btn btn-outline-primary">
                             My cart:
                             <span id="cart-items-quantity"></span>

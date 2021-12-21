@@ -11,4 +11,5 @@ public interface PhoneService {
     List<Phone> findPhones(SearchStructure searchStructure, int offset, int limit);
     void save(Phone phone);
     long count(String query);
+    Optional<Phone> findByModel(String model);
 }

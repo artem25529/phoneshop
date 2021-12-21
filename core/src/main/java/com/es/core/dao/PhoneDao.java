@@ -14,4 +14,5 @@ public interface PhoneDao {
     List<Phone> findAll(SearchStructure structure, int offset, int limit);
     void updatePhoneColors(Long phoneId, Set<Color> colors);
     long count(String query);
+    Optional<Phone> findByModel(String model);
 }

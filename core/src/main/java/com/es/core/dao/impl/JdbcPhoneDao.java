@@ -5,6 +5,7 @@ import com.es.core.model.phone.Color;
 import com.es.core.model.phone.Phone;
 import com.es.core.model.search.SearchStructure;
 import org.h2.util.StringUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -65,6 +66,7 @@ public class JdbcPhoneDao extends JdbcAbstractDao<Phone> implements PhoneDao {
     private static final String INSERT_PHONE_COLORS = "INSERT INTO phone2color (phoneId, colorId) " +
             "VALUES (:phoneId, :colorId)";
     private static final String DELETE_PHONE_COLORS = "DELETE FROM phone2color WHERE phoneId = :phoneId";
+    private static final String FIND_BY_MODEL = "SELECT * FROM phones WHERE model = :model";
 
     @Resource
     private PhoneBeanPropertyRowMapper phoneBeanPropertyRowMapper;
@@ -72,6 +74,12 @@ public class JdbcPhoneDao extends JdbcAbstractDao<Phone> implements PhoneDao {
     @Override
     public Optional<Phone> get(final Long key) {
         return super.get(FIND_PHONE_BY_ID, new MapSqlParameterSource("id", key), phoneBeanPropertyRowMapper);
+    }
+
+    public Optional<Phone> findByModel(final String model) {
+        return Optional.ofNullable(namedParameterJdbcTemplate.queryForObject(FIND_BY_MODEL,
+                new MapSqlParameterSource("model", model),
+                new BeanPropertyRowMapper<>(Phone.class)));
     }
 
     @Override

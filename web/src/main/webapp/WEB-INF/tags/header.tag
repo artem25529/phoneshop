@@ -26,6 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/admin/orders"/> ">Admin</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/quickOrderEntity"/> ">Quick Order</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="d-flex justify-content-between align-items-end">

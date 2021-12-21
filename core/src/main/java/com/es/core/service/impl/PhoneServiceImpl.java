@@ -35,6 +35,10 @@ public class PhoneServiceImpl implements PhoneService {
         return phoneDao.findAll(searchStructure, offset, limit);
     }
 
+    public Optional<Phone> findByModel(String model) {
+        return phoneDao.findByModel(model);
+    }
+
     @Override
     public void save(Phone phone) {
         phoneDao.save(phone);
